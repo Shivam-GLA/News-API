@@ -81,32 +81,40 @@ export class News extends Component {
     }
 
     handlePrevClick = async () => {
-        console.log("Previous");
+        // console.log("Previous");
+        this.props.setProgress(10); //top loading bar
         let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=10c6936ab4b94e038ebddffe7b7e483d&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
         this.setState({loading: true})
         let data = await fetch(url);
+        this.props.setProgress(30); //top loading bar
         let parseData = await data.json();
+        this.props.setProgress(70); //top loading bar
         console.log(parseData);
         this.setState({
             page: this.state.page - 1,
             articles: parseData.articles,
             loading: false
         })
+        this.props.setProgress(100); //top loading bar
     }
 
     handleNextClick = async () => {
-        console.log("Next");
+        // console.log("Next");
+        this.props.setProgress(10); //top loading bar
         if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize))) {
             let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=10c6936ab4b94e038ebddffe7b7e483d&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
             this.setState({loading: true})
             let data = await fetch(url);
+            this.props.setProgress(30); //top loading bar
             let parseData = await data.json();
+            this.props.setProgress(70); //top loading bar
             console.log(parseData);
             this.setState({
                 page: this.state.page + 1,
                 articles: parseData.articles,
                 loading: false
             })
+            this.props.setProgress(100); //top loading bar
         }
     }
 
@@ -115,7 +123,7 @@ export class News extends Component {
         return (
             <div className='container my-3'>
                 {/* This is a news component */}
-                <h1 className='text-center' style={{ margin: '30px 0px' }}>NewsCbum - Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
+                <h1 className='text-center' style={{ margin: '30px 0px', marginTop: '80px' }}>NewsCbum - Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
                 {this.state.loading && <Spinner />}
                 <div className="row">
                     {/* {this.state.articles.map((element) => { console.log(element) })} */}
