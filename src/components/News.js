@@ -65,7 +65,7 @@ export class News extends Component {
     async componentDidMount() {
         this.props.setProgress(10); //top loading bar
         // console.log("componentDidMount");
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=10c6936ab4b94e038ebddffe7b7e483d&pageSize=${this.props.pageSize}`;
+        let url = `/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=10c6936ab4b94e038ebddffe7b7e483d&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true })
         let data = await fetch(url);
         this.props.setProgress(30); //top loading bar
@@ -83,7 +83,7 @@ export class News extends Component {
     handlePrevClick = async () => {
         // console.log("Previous");
         this.props.setProgress(10); //top loading bar
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=10c6936ab4b94e038ebddffe7b7e483d&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
+        let url = `/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=10c6936ab4b94e038ebddffe7b7e483d&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
         this.setState({loading: true})
         let data = await fetch(url);
         this.props.setProgress(30); //top loading bar
@@ -102,7 +102,7 @@ export class News extends Component {
         // console.log("Next");
         this.props.setProgress(10); //top loading bar
         if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize))) {
-            let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=10c6936ab4b94e038ebddffe7b7e483d&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
+            let url = `/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=10c6936ab4b94e038ebddffe7b7e483d&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
             this.setState({loading: true})
             let data = await fetch(url);
             this.props.setProgress(30); //top loading bar
